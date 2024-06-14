@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class BoardService(ABC):
+class BoardRepository(ABC):
     @abstractmethod
     def list(self):
         pass
