@@ -1,14 +1,13 @@
-from board.repository.board_repository_impl import BoardRepositoryImpl
+from board.entity.models import Board
 from board.service.board_service import BoardService
 
 
-class BoardServiceImpl(BoardService):
+class BoardRepositoryImpl(BoardService):
     __instance = None
 
     def __new__(cls):
         if cls.__instance is None:
             cls.__instance = super().__new__(cls)
-            cls.__instance.__boardRepository = BoardRepositoryImpl.getInstance()
 
         return cls.__instance
 
@@ -20,5 +19,4 @@ class BoardServiceImpl(BoardService):
         return cls.__instance
 
     def list(self):
-        return self.__boardRepository.list()
-
+        return Board.objects.all().order_by('regDate')
