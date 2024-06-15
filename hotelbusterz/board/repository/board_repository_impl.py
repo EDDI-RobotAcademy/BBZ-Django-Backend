@@ -1,8 +1,8 @@
 from board.entity.models import Board
-from board.service.board_service import BoardService
+from board.repository.board_repository import BoardRepository
 
 
-class BoardRepositoryImpl(BoardService):
+class BoardRepositoryImpl(BoardRepository):
     __instance = None
 
     def __new__(cls):
@@ -20,3 +20,8 @@ class BoardRepositoryImpl(BoardService):
 
     def list(self):
         return Board.objects.all().order_by('regDate')
+
+    def create(self, boardData):
+        board = Board(**boardData)
+        board.save()
+        return board
