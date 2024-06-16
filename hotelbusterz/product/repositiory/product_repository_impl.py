@@ -1,14 +1,13 @@
-from product.repositiory.product_repository_impl import ProductRepositoryImpl
-from product.service.product_service import ProductService
+from product.entity.models import Product
+from product.repositiory.product_repository import ProductRepository
 
 
-class ProductServiceImpl(ProductService):
+class ProductRepositoryImpl(ProductRepository):
     __instance = None
 
     def __new__(cls):
         if cls.__instance is None:
             cls.__instance = super().__new__(cls)
-            cls.__productRepository = ProductRepositoryImpl.getInstance()
 
         return cls.__instance
 
@@ -20,4 +19,4 @@ class ProductServiceImpl(ProductService):
         return cls.__instance
 
     def list(self):
-        return self.__productRepository.list()
+        return Product.objects.all()

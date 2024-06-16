@@ -9,4 +9,5 @@ router.register(r'product', ProductView)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('list/', ProductView.as_view({'get': 'list'}), name="product-list"),
 ]
