@@ -25,3 +25,7 @@ class BoardRepositoryImpl(BoardRepository):
         board = Board(**boardData)
         board.save()
         return board
+
+    def deleteBoardId(self, boardId):
+        board = Board.objects.get(boardId=boardId)
+        board.delete()

@@ -24,3 +24,6 @@ class BoardServiceImpl(BoardService):
 
     def createBoard(self, boardData):
         return self.__boardRepository.create(boardData)
+
+    def removeBoard(self, boardId):
+        return self.__boardRepository.deleteBoardId(boardId)

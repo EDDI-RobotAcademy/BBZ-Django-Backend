@@ -9,3 +9,7 @@ class BoardService(ABC):
     @abstractmethod
     def createBoard(self, boardData):
         pass
+
+    @abstractmethod
+    def removeBoard(self, boardId):
+        pass

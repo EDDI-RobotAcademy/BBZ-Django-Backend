@@ -1,2 +1,19 @@
 # BBZ-Django-Backend
 슈슈슝 쾅쾅쾅!
+
+Package             Version
+------------------- --------
+asgiref             3.8.1
+certifi             2024.6.2
+charset-normalizer  3.3.2
+Django              5.0.6
+django-cors-headers 4.3.1
+djangorestframework 3.15.1
+idna                3.7
+mysqlclient         2.2.4
+pip                 23.2.1
+python-dotenv       1.0.1
+requests            2.32.3
+sqlparse            0.5.0
+tzdata              2024.1
+urllib3             2.2.1
