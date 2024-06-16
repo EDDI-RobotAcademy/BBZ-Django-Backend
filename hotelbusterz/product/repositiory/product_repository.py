@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class ProductService(ABC):
+class ProductRepository(ABC):
     @abstractmethod
     def list(self):
         pass
