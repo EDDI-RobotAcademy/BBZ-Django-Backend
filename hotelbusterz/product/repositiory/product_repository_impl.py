@@ -1,8 +1,8 @@
-from board.entity.models import Board
-from board.repository.board_repository import BoardRepository
+from product.entity.models import Product
+from product.repositiory.product_repository import ProductRepository
 
 
-class BoardRepositoryImpl(BoardRepository):
+class ProductRepositoryImpl(ProductRepository):
     __instance = None
 
     def __new__(cls):
@@ -19,9 +19,4 @@ class BoardRepositoryImpl(BoardRepository):
         return cls.__instance
 
     def list(self):
-        return Board.objects.all().order_by('regDate')
-
-    def create(self, boardData):
-        board = Board(**boardData)
-        board.save()
-        return board
+        return Product.objects.all()
