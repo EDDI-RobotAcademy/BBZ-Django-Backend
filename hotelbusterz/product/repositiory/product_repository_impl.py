@@ -1,5 +1,6 @@
 import os.path
 
+from hotelbusterz import settings
 from product.entity.models import Product
 from product.repositiory.product_repository import ProductRepository
 
@@ -24,8 +25,7 @@ class ProductRepositoryImpl(ProductRepository):
         return Product.objects.all()
 
     def create(self, productName, productLocation, productActivity, productDining, productPrice, productImageName):
-        uploadDirectory = r"/Users/j213h/Documents/Python/SKN AI Camp/BBZ/BBZ-Vue-Frontend/src/assets/images/uploadImages"
-
+        uploadDirectory = os.path.join(settings.BASE_DIR, "../../BBZ-Vue-Frontend/src/assets/images/uploadImages")
         if not os.path.exists(uploadDirectory):
             os.makedirs(uploadDirectory)
 
