@@ -21,18 +21,18 @@ class ProductView(viewsets.ViewSet):
         try:
             data = request.data
 
-            productImage = request.FILES.get('productImageName')
+            productImageName = request.FILES.get('productImageName')
             productName = data.get('productName')
             productLocation = data.get('productLocation')
             productActivity = data.get('productActivity')
             productDining = data.get('productDining')
             productPrice = data.get('productPrice')
 
-            if not all([productImage, productName, productLocation, productActivity, productDining, productPrice]):
+            if not all([productImageName, productName, productLocation, productActivity, productDining, productPrice]):
                 return Response({ 'error': '모든 내용을 채워주세요!' },
                                 status=status.HTTP_400_BAD_REQUEST)
 
-            self.productService.createProduct(productName, productLocation, productActivity, productDining, productPrice, productImage)
+            self.productService.createProduct(productName, productLocation, productActivity, productDining, productPrice, productImageName)
 
             return Response(status=status.HTTP_200_OK)
 
