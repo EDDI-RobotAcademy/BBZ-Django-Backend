@@ -24,3 +24,7 @@ class BoardServiceImpl(BoardService):
 
     def createBoard(self, boardData):
         return self.__boardRepository.create(boardData)
+
+    def readBoard(self, boardId):
+        return self.__boardRepository.findByBoardId(boardId)
+
