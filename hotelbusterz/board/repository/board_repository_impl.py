@@ -28,3 +28,4 @@ class BoardRepositoryImpl(BoardRepository):
 
     def findByBoardId(self, boardId):
         board = Board.objects.get(boardId=boardId)
+        return board
