@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "board",
     "product",
+    "kakao_oauth",
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,14 @@ WSGI_APPLICATION = "hotelbusterz.wsgi.application"
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
 
+# KAKAO Settings
+KAKAO = {
+    'LOGIN_URL': os.getenv('KAKAO_LOGIN_URL'),
+    'CLIENT_ID': os.getenv('KAKAO_CLIENT_ID'),
+    'REDIRECT_URI': os.getenv('KAKAO_REDIRECT_URI'),
+    'TOKEN_REQUEST_URI': os.getenv('KAKAO_TOKEN_REQUEST_URI'),
+    'USERINFO_REQUEST_URI': os.getenv('KAKAO_USERINFO_REQUEST_URI'),
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
