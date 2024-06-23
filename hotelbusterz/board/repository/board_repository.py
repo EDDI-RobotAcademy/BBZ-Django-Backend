@@ -13,3 +13,8 @@ class BoardRepository(ABC):
     @abstractmethod
     def findByBoardId(self, boardId):
         pass
+
+    @abstractmethod
+    def modify(self, boardData, boardId):
+        pass
+

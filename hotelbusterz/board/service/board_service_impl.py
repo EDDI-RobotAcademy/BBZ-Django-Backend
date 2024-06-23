@@ -28,3 +28,6 @@ class BoardServiceImpl(BoardService):
     def readBoard(self, boardId):
         return self.__boardRepository.findByBoardId(boardId)
 
+    def modifyBoard(self, boardData, boardId):
+        return self.__boardRepository.modify(boardData, boardId)
+
