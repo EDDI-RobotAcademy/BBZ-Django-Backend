@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from account.controller.views import AccountView
 
 router = DefaultRouter()
-router.register(r'account', AccountView)
+router.register(r'account', AccountView, basename='account')
 
 
 urlpatterns = [
