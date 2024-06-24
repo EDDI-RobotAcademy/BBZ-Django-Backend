@@ -26,19 +26,6 @@ class BoardRepositoryImpl(BoardRepository):
         board.save()
         return board
 
-    def findByBoardId(self, boardId):
-        board = Board.objects.get(boardId=boardId)
-        return board
-
-    def modify(self, boardData, boardId):
-        board = self.findByBoardId(boardId)
-        for key, value in boardData.items():
-            setattr(board, key, value)
-        board.save()
-        return board
-
-
-
     def deleteBoardId(self, boardId):
         board = Board.objects.get(boardId=boardId)
         board.delete()
