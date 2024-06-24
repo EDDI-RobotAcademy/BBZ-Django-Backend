@@ -38,7 +38,3 @@ class BoardRepositoryImpl(BoardRepository):
         return board
 
 
-
-    def deleteBoardId(self, boardId):
-        board = Board.objects.get(boardId=boardId)
-        board.delete()
