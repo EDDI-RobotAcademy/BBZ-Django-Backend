@@ -31,3 +31,14 @@ class KakaoOauthView(viewsets.ViewSet):
 
         except Exception as e:
             return JsonResponse({ 'error': str(e) }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def kakaoUserInfoURI(self, request):
+        accessToken = request.data.get('access_token')
+        print(f'accessToken: {accessToken}')
+
+        try:
+            user_info = self.kakaoOauthService.requestUserInfo(accessToken)
+            return JsonResponse({'user_info': user_info})
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
