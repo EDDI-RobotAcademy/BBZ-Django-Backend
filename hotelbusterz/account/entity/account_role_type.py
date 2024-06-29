@@ -2,12 +2,10 @@ from django.db import models
 
 
 class AccountRoleType(models.Model):
-    class RoleType(models.TextChoices):
-        ROLE = 'customer', 'admin'
-    roleType = models.CharField(max_length=30, choices=RoleType.choices)
+    roleType = models.CharField(max_length=64)
 
     def __str__(self):
-        return f"roleType -> {self.roleType}"
+        return self.roleType
 
     class Meta:
         db_table = 'account_role_type'
