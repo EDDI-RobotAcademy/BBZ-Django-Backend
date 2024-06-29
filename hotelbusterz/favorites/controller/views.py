@@ -4,13 +4,14 @@ from rest_framework.response import Response
 
 from favorites.entity.favorites import Favorites
 from favorites.service.favorites_service_impl import FavoritesServiceImpl
+from kakao_oauth.service.redis_service_impl import RedisServiceImpl
 
 
 # Create your views here.
 class FavoritesView(viewsets.ViewSet):
     queryset = Favorites.objects.all()
 
-    # redisService = RedisServiceImpl.getInstance()
+    redisService = RedisServiceImpl.getInstance()
     favoritesService = FavoritesServiceImpl.getInstance()
 
     def favoritesRegister(self, request):

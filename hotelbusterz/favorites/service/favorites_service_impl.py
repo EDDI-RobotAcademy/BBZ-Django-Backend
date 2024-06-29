@@ -1,3 +1,4 @@
+from account.repository.account_repository_impl import AccountRepositoryImpl
 from favorites.repository.favorites_item_repository_impl import FavoritesItemRepositoryImpl
 from favorites.repository.favorites_repository_impl import FavoritesRepositoryImpl
 from favorites.service.favorites_service import FavoritesService
