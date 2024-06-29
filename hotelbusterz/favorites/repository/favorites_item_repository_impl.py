@@ -21,3 +21,8 @@ class FavoritesItemRepositoryImpl(FavoritesItemRepository):
     def findAllByProductId(self, productId):
         return FavoritesItem.objects.filter(product_id=productId)
 
+    def register(self, favoritesData, favorites, product):
+        FavoritesItem.objects.create(
+            favorites=favorites,
+            product=product
+        )

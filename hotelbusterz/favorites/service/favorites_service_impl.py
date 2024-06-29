@@ -33,7 +33,7 @@ class FavoritesServiceImpl(FavoritesService):
 
         if favorites is None:
             favorites = self.__favoritesRepository.register(account)
-
+        print(f"favorites: {favorites}")
         productId = favoritesData.get('productId')
         print(f"productId: {productId}")
         favoritesItemList = self.__favoritesItemRepository.findAllByProductId(productId)

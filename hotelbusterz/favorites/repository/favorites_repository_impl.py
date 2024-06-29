@@ -19,7 +19,12 @@ class FavoritesRepositoryImpl(FavoritesRepository):
         return cls.__instance
 
     def findByAccount(self, account):
-        return Favorites.objects.get(account=account)
+        try:
+            favorites = Favorites.objects.get(account=account)
+            return favorites
+        except Favorites.DoesNotExist:
+            print(f"Account로 Favorites 찾을 수 없음! {account}")
+            return None
 
     def register(self, account):
         return Favorites.objects.create(account=account)
