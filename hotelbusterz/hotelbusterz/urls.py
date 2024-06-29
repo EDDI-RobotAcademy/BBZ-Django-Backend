@@ -23,4 +23,5 @@ urlpatterns = [
     path("product/", include("product.urls")),
     path('kakaoOauth/', include("kakao_oauth.urls")),
     path("account/", include("account.urls")),
+    path("favorites/", include("favorites.urls")),
 ]
