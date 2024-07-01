@@ -51,3 +51,21 @@ class FavoritesServiceImpl(FavoritesService):
             product = self.__productRepository.findByProductId(favoritesData.get('productId'))
             self.__favoritesItemRepository.register(favoritesData, favorites, product)
 
+    def favoritesList(self, accountId):
+        account = self.__accountRepository.findById(accountId)
+        favorites = self.__favoritesRepository.findByAccount(account)
+
+        favoritesItemList = self.__favoritesItemRepository.findByFavorites(favorites)
+        favoritesItemListResponseForm = []
+
+        for favoritesItem in favoritesItemList:
+            favoritesItemResponseForm = {
+                'favoritesItemId': favoritesItem.favoritesItemId,
+                'productId': favoritesItem.product.productId,
+                'productName': favoritesItem.product.productName,
+                'productPrice': favoritesItem.product.productPrice
+            }
+            favoritesItemListResponseForm.append(favoritesItemResponseForm)
+
+        return favoritesItemListResponseForm
+

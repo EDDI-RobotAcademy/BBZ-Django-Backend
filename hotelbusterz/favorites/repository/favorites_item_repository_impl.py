@@ -26,3 +26,8 @@ class FavoritesItemRepositoryImpl(FavoritesItemRepository):
             favorites=favorites,
             product=product
         )
+
+    def findByFavorites(self, favorites):
+        return list(FavoritesItem.objects.filter(favorites=favorites))
+
+
