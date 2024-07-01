@@ -9,3 +9,7 @@ class FavoritesItemRepository(ABC):
     @abstractmethod
     def register(self, favoritesData, favorites, product):
         pass
+
+    @abstractmethod
+    def findByFavorites(self, favorites):
+        pass

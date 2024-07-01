@@ -10,4 +10,5 @@ router.register(r'favorites', FavoritesView, basename='favorites')
 urlpatterns = [
     path('', include(router.urls)),
     path('register', FavoritesView.as_view({'post': 'favoritesRegister'}), name='favorites-register'),
+    path('list', FavoritesView.as_view({'post': 'favoritesList'}), name='favorites-list'),
 ]
