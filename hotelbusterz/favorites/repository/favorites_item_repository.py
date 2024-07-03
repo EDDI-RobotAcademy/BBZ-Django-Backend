@@ -13,3 +13,7 @@ class FavoritesItemRepository(ABC):
     @abstractmethod
     def findByFavorites(self, favorites):
         pass
+
+    @abstractmethod
+    def removeFavoritesItem(self, favorites, product):
+        pass

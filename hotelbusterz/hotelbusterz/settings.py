@@ -94,6 +94,12 @@ KAKAO = {
     'USERINFO_REQUEST_URI': os.getenv('KAKAO_USERINFO_REQUEST_URI'),
 }
 
+# ADMIN Settings
+ADMIN = {
+    'EMAIL': os.getenv('ADMIN_EMAIL'),
+    'PASSWORD': os.getenv('ADMIN_PASSWORD')
+}
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
