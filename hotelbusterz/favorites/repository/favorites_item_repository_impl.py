@@ -30,4 +30,8 @@ class FavoritesItemRepositoryImpl(FavoritesItemRepository):
     def findByFavorites(self, favorites):
         return list(FavoritesItem.objects.filter(favorites=favorites))
 
+    def removeFavoritesItem(self, favorites, product):
+        favoritesItem = FavoritesItem.objects.get(favorites=favorites, product=product)
+        favoritesItem.delete()
+
 
