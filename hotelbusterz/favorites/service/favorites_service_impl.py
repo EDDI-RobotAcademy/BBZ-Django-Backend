@@ -50,6 +50,9 @@ class FavoritesServiceImpl(FavoritesService):
         if favoritesItem is None:
             product = self.__productRepository.findByProductId(favoritesData.get('productId'))
             self.__favoritesItemRepository.register(favoritesData, favorites, product)
+        else:
+            product = self.__productRepository.findByProductId(productId)
+            self.__favoritesItemRepository.removeFavoritesItem(favorites, product)
 
     def favoritesList(self, accountId):
         account = self.__accountRepository.findById(accountId)
