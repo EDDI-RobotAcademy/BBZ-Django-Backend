@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "account",
     "favorites",
     "marketing",
+    "survey",
 ]
 
 MIDDLEWARE = [
