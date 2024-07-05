@@ -15,18 +15,20 @@ class SurveyView(viewsets.ViewSet):
         try:
             data = request.data
 
-            productId = data.get('product_id')
-            numOfAdult = data.get('num_of_adult')
-            numOfChild = data.get('num_of_child')
-            haveBreakfast = data.get('have_breakfast')
-            isExistCar = data.get('exist_car')
-            lenOfReservation = data.get('len_of_reservation')
-
-            print(productId, numOfAdult, numOfChild, haveBreakfast, isExistCar, lenOfReservation)
+            productId = data.get('productId')
+            numOfAdult = data.get('numOfAdult')
+            numOfChild = data.get('numOfChild')
+            haveBreakfast = data.get('haveBreakfast')
+            isExistCar = data.get('isExistCar')
+            lenOfReservation = data.get('lenOfReservation')
 
             if not all([productId, numOfAdult, numOfChild, haveBreakfast, isExistCar, lenOfReservation]):
                 return Response({'error': '모든 내용을 채워주세요!'},
                                 status=status.HTTP_400_BAD_REQUEST)
+
+            isExistCar = 1 if isExistCar else 0
+            numOfChild = int(numOfChild)
+            print(productId, numOfAdult, numOfChild, haveBreakfast, isExistCar, lenOfReservation)
 
             if numOfAdult < 1:
                 return Response({'error': '최소 한 명의 성인은 포함되어야 합니다!'},

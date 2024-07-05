@@ -29,4 +29,3 @@ class SurveyRepositoryImpl(SurveyRepository):
         )
         survey.save()
         return survey
-
