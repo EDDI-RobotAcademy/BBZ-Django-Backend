@@ -27,8 +27,10 @@ class SurveyView(viewsets.ViewSet):
                                 status=status.HTTP_400_BAD_REQUEST)
 
             isExistCar = 1 if isExistCar else 0
-            numOfChild = int(numOfChild)
-            print(productId, numOfAdult, numOfChild, haveBreakfast, isExistCar, lenOfReservation)
+            numOfChild = int(numOfAdult)
+            numOfAdult = int(numOfAdult)
+            haveBreakfast = int(haveBreakfast)
+            # print(*map(type, [productId, numOfAdult, numOfChild, haveBreakfast, isExistCar, lenOfReservation]))
 
             if numOfAdult < 1:
                 return Response({'error': '최소 한 명의 성인은 포함되어야 합니다!'},
