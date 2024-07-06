@@ -4,10 +4,12 @@ from rest_framework.response import Response
 
 from account.serializers import AccountSerializer
 from account.service.account_service_impl import AccountServiceImpl
+from kakao_oauth.service.redis_service_impl import RedisServiceImpl
 
 
 class AccountView(viewsets.ViewSet):
     accountService = AccountServiceImpl.getInstance()
+    redisService = RedisServiceImpl.getInstance()
 
     def checkEmailDuplication(self, request):
         # url = self.oauthService.kakaoLoginAddress()
@@ -53,4 +55,23 @@ class AccountView(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Exception as e:
             print("계정 생성 중 에러 발생:", e)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def registerLog(self, request):
+        try:
+            userToken = request.data.get('userToken')
+
+            accountId = self.redisService.getValueByKey(userToken)
+            action = request.data.get('action')
+            actionTime = request.data.get('actionTime')
+
+            log = self.accountService.registerLog(
+                accountId=accountId,
+                action=action,
+                actionTime=actionTime,
+            )
+
+            return Response(status=status.HTTP_200_OK)
+        except Exception as e:
+            print("로그 생성 중 에러 발생:", e)
             return Response(status=status.HTTP_400_BAD_REQUEST)

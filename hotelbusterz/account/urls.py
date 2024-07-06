@@ -18,4 +18,7 @@ urlpatterns = [
     path('register',
          AccountView.as_view({'post': 'registerAccount'}),
          name='register-account'),
+    path('log',
+         AccountView.as_view({'post': 'registerLog'}),
+         name='register-log'),
 ]

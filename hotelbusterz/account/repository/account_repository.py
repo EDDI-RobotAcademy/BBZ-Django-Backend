@@ -9,3 +9,7 @@ class AccountRepository(ABC):
     @abstractmethod
     def findById(self, accountId):
         pass
+
+    @abstractmethod
+    def createLog(self, accountId, action, actionTime):
+        pass
