@@ -16,3 +16,7 @@ class AccountService(ABC):
     @abstractmethod
     def findAccountByEmail(self, email):
         pass
+
+    @abstractmethod
+    def registerLog(self, userToken, action, actionTime):
+        pass
