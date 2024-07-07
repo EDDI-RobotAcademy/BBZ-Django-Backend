@@ -2,7 +2,7 @@ import os.path
 
 from hotelbusterz import settings
 from product.entity.models import Product
-from product.repositiory.product_repository import ProductRepository
+from product.repository.product_repository import ProductRepository
 
 
 class ProductRepositoryImpl(ProductRepository):

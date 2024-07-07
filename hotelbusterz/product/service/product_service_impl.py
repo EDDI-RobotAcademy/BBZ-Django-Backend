@@ -1,4 +1,4 @@
-from product.repositiory.product_repository_impl import ProductRepositoryImpl
+from product.repository.product_repository_impl import ProductRepositoryImpl
 from product.service.product_service import ProductService
 
 

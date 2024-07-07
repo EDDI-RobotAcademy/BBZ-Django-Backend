@@ -1,4 +1,4 @@
-from product.repositiory.product_repository_impl import ProductRepositoryImpl
+from product.repository.product_repository_impl import ProductRepositoryImpl
 from survey.repository.survey_repository_impl import SurveyRepositoryImpl
 from survey.service.survey_service import SurveyService
 
