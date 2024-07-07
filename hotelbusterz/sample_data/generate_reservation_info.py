@@ -15,7 +15,7 @@ hotel_numbers = list(Product.object.values_list('productId', flat=True))
 print(f"hotel_numbers: {hotel_numbers}")
 # 호텔 개수는 총 5개로 설정.
 # 호텔 개수가 부족하면 더 만들기
-if len(hotel_numbers)<5:
+if len(hotel_numbers) < 5:
     for i in range(len(hotel_numbers), 5):
         hotel_numbers.append(i)
 
@@ -23,16 +23,17 @@ if len(hotel_numbers)<5:
 def create_random_reservation(product_id):
     try:
         with transaction.atomic():
-            product = Product.objects.create(product_id = product_id)
+            product = Product.objects.create(product_id=product_id)
             # TODO: 랜덤한 값 집어넣기 아직 진행 안됨
+                # 랜덤값이 아닌 호텔별 인원수 지정하여 테이블 생성 필요...!
             # order(reservation) 도메인 접근 필요.
-            reservation = Reservations.objects.create(
-                product_number = product,
-                len_of_reservation = 0000,
-                num_of_adult = 0000,
-                num_of_child = 0000,
-                breakfast_info = 0000,
-                with_car_info = 0000,
+            Reservations.objects.create(
+                product_number=product,
+                len_of_reservation=0000,
+                num_of_adult=0000,
+                num_of_child=0000,
+                breakfast_info=0000,
+                with_car_info=0000,
             )
 
     except Exception as e:
@@ -48,6 +49,5 @@ for _ in range(100000):
     # 랜덤하게 지정한 호텔의 예약정보 생성
     create_random_reservation(product_id)
     pass
-
 
 print("Dummy Data creationo Completed.")
