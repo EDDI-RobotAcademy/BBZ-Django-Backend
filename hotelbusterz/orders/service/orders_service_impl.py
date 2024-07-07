@@ -29,18 +29,14 @@ class OrdersServiceImpl(OrdersService):
 
         return cls.__instance
 
-    def createOrder(self, accountId, orderItemList):
+    def createOrder(self, accountId, productId):
         try:
             orders = self.__ordersRepository.create(accountId, OrderStatus.PENDING)
-
-            for item in orderItemList:
-                favoritesItem = self.__favoritesItemRepository.findById(item['favoritesItemId'])
-                self.__ordersItemRepository.create(
-                    orders,
-                    favoritesItem.product,
-                    item['orderPrice'],
-                    item['quantity']
-                )
+            product = self.__productRepository.findByProductId(productId)
+            self.__ordersItemRepository.create(
+                orders,
+                product
+            )
 
             return orders.id
 
@@ -50,36 +46,28 @@ class OrdersServiceImpl(OrdersService):
 
     def readOrderDetails(self, orderId, accountId):
         try:
-            order = self.__ordersRepository.findById(orderId)
-            # print(f"order.account.id: {order.account.id}, accountId: {accountId}")
-            # print(f"type(order.account.id): {type(order.account.id)}, type(accountId): {type(accountId)}")
-            if order.account.id != int(accountId):
+            orders = self.__ordersRepository.findById(orderId)
+
+            if orders.account.id != int(accountId):
                 raise ValueError('Invalid accountId for this order')
 
             print("check order object <- readOrderDetails()")
 
             # OrdersItemRepositoryImpl을 통해 해당 주문의 상세 항목들을 조회합니다.
-            ordersItemList = self.__ordersItemRepository.findAllByOrder(order)
-
-            totalPrice = sum(ordersItem.total_price() for ordersItem in ordersItemList)
+            ordersItemList = self.__ordersItemRepository.findAllByOrder(orders)
 
             # 조회된 주문 상세 내역을 필요한 형식으로 반환할 수 있도록 구성합니다.
             order_details = {
                 'order': {
-                    'id': order.id,
-                    'status': order.status,
-                    'created_date': order.created_date,
-                    'total_price': totalPrice,
-                    # 'shipping_address': order.shipping_address,
-                    # 'billing_address': order.billing_address,
+                    'id': orders.id,
+                    'status': orders.status,
+                    'created_date': orders.created_date,
                 },
                 'order_items': [
                     {
                         'product_id': item.product_id,
                         'product_name': self.__productRepository.findByProductId(item.product_id).productName,
-                        'quantity': item.quantity,
-                        'price': item.price,
-                        'total_price': item.total_price(),
+                        'product_price': self.__productRepository.findByProductId(item.product_id).productPrice,
                     }
                     for item in ordersItemList
                 ]

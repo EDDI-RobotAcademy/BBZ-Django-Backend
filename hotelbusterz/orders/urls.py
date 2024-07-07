@@ -9,4 +9,5 @@ router.register(r'orders', OrdersView)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('create', OrdersView.as_view({'post': 'createOrders'}), name='order-create'),
 ]
