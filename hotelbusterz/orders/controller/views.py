@@ -23,10 +23,9 @@ class OrdersView(viewsets.ViewSet):
             if not accountId:
                 raise ValueError('Invalid userToken')
 
-            orderItemList = data.get('items')
-            print(f"orderItemList: {orderItemList}")
+            productId = data.get('productId')
 
-            orderId = self.ordersService.createOrder(accountId, orderItemList)
+            orderId = self.ordersService.createOrder(accountId, productId)
             return Response(orderId, status=status.HTTP_200_OK)
 
         except Exception as e:

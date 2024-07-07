@@ -19,9 +19,11 @@ class OrdersItemRepositoryImpl(OrdersItemRepository):
 
         return cls.__instance
 
-    def create(self, orders, product, price, quantity):
-        order_item = OrdersItem(orders=orders, product=product, price=price, quantity=quantity)
-        order_item.save()
+    def create(self, orders, product):
+        ordersItem = OrdersItem(orders=orders, product=product)
+        ordersItem.save()
 
-    def findAllByOrder(self, order):
-        return OrdersItem.objects.filter(orders=order)
+        return ordersItem
+
+    def findAllByOrder(self, orders):
+        return OrdersItem.objects.filter(orders=orders)
