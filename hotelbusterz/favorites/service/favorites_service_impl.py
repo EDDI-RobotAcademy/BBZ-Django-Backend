@@ -2,7 +2,7 @@ from account.repository.account_repository_impl import AccountRepositoryImpl
 from favorites.repository.favorites_item_repository_impl import FavoritesItemRepositoryImpl
 from favorites.repository.favorites_repository_impl import FavoritesRepositoryImpl
 from favorites.service.favorites_service import FavoritesService
-from product.repositiory.product_repository_impl import ProductRepositoryImpl
+from product.repository.product_repository_impl import ProductRepositoryImpl
 
 
 class FavoritesServiceImpl(FavoritesService):

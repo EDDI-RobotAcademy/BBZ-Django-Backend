@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     "kakao_oauth",
     "account",
     "favorites",
+    "marketing",
+    "survey",
+    "orders",
 ]
 
 MIDDLEWARE = [

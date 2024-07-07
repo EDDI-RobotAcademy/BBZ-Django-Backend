@@ -34,3 +34,7 @@ class AccountServiceImpl(AccountService):
 
     def findAccountByEmail(self, email):
         return self.__profileRepository.findByEmail(email)
+
+    def registerLog(self, accountId, action, actionTime):
+        log = self.__accountRepository.createLog(accountId, action, actionTime)
+        return log is not None
