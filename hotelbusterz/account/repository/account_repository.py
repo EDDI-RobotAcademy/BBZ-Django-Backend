@@ -13,3 +13,12 @@ class AccountRepository(ABC):
     @abstractmethod
     def createLog(self, accountId, action, actionTime):
         pass
+
+
+    @abstractmethod
+    def createLogDataFrame(self):
+        pass
+
+    @abstractmethod
+    def accountList(self):
+        pass

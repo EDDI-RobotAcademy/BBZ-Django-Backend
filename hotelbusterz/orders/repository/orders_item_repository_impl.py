@@ -25,5 +25,5 @@ class OrdersItemRepositoryImpl(OrdersItemRepository):
 
         return ordersItem
 
-    def findAllByOrder(self, orders):
-        return OrdersItem.objects.filter(orders=orders)
+    def findByOrders(self, orders):
+        return OrdersItem.objects.get(orders=orders)
