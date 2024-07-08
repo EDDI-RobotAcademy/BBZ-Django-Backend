@@ -4,14 +4,14 @@ import random
 from django.db import transaction
 
 from product.entity.models import Product
-from reservation.entity.reservations import Reservations
+from survey.entity.models import Survey
 
 # Django settings 모듈 설정
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "manual_proj.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hotelbusterz.settings")
 django.setup()
 
 # 기존 호텔 목록 들고오기.
-hotel_numbers = list(Product.object.values_list('productId', flat=True))
+hotel_numbers = list(Product.objects.values_list('productId', flat=True))
 print(f"hotel_numbers: {hotel_numbers}")
 # 호텔 개수는 총 5개로 설정.
 # 호텔 개수가 부족하면 더 만들기
@@ -23,21 +23,51 @@ if len(hotel_numbers) < 5:
 def create_random_reservation(product_id):
     try:
         with transaction.atomic():
-            product = Product.objects.create(product_id=product_id)
+            product = Product.objects.all()
+            productindx = product[product_id]
             # TODO: 랜덤한 값 집어넣기 아직 진행 안됨
-                # 랜덤값이 아닌 호텔별 인원수 지정하여 테이블 생성 필요...!
+            if product_id == 0:
+                len_of_reservation = random.randint(1, 6)
+                num_of_adult = random.randint(1, 2)
+                num_of_child = random.randint(0, 2)
+                breakfast_info = random.randint(0, num_of_child + num_of_adult)
+                with_car_info = 0
+            elif productindx == 1:
+                len_of_reservation = random.randint(3, 8)
+                num_of_adult = random.randint(1, 3)
+                num_of_child = random.randint(0, 2)
+                breakfast_info = random.randint(0, num_of_child + num_of_adult)
+                with_car_info = 1
+            elif productindx == 2:
+                len_of_reservation = random.randint(5, 10)
+                num_of_adult = random.randint(1, 4)
+                num_of_child = random.randint(0, 3)
+                breakfast_info = random.randint(0, num_of_child + num_of_adult)
+                with_car_info = 1
+            elif productindx == 3:
+                len_of_reservation = random.randint(7, 12)
+                num_of_adult = random.randint(1, 5)
+                num_of_child = random.randint(0, 1)
+                breakfast_info = random.randint(0, num_of_child + num_of_adult)
+                with_car_info = 0
+            elif productindx == 4:
+                len_of_reservation = random.randint(9, 14)
+                num_of_adult = random.randint(1, 6)
+                num_of_child = random.randint(0, 1)
+                breakfast_info = random.randint(0, num_of_child + num_of_adult)
+                with_car_info = 1
             # order(reservation) 도메인 접근 필요.
-            Reservations.objects.create(
-                product_number=product,
-                len_of_reservation=0000,
-                num_of_adult=0000,
-                num_of_child=0000,
-                breakfast_info=0000,
-                with_car_info=0000,
+            Survey.objects.create(
+                product=productindx,
+                num_of_adult=num_of_adult,
+                num_of_child=num_of_child,
+                have_breakfast=breakfast_info,
+                is_exist_car=with_car_info,
+                len_of_reservation=len_of_reservation,
             )
 
     except Exception as e:
-        print("Error occured in creating dummy database.")
+        print(f"Error occured in creating dummy database:{e}")
 
     pass
 
@@ -50,4 +80,4 @@ for _ in range(100000):
     create_random_reservation(product_id)
     pass
 
-print("Dummy Data creationo Completed.")
+print("Dummy Data creation Completed.")
