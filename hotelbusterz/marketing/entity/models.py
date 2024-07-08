@@ -5,6 +5,7 @@ from account.entity.account import Account
 
 # Create your models here.
 class Marketing(models.Model):
+    id = models.DateTimeField(auto_now_add=True, primary_key=True)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     acquisition = models.PositiveIntegerField(null=False)
     activation = models.PositiveIntegerField(null=False)
