@@ -299,3 +299,6 @@ pyrightconfig.json
 /node_modules
 /.pnp
 .pnp.js
+
+# exclude excel file
+*.xlsx
