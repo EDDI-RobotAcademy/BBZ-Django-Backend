@@ -41,14 +41,14 @@ def create_random_order(account_id):
         print(f"Error creating order for account {account_id}: {e}")
 
 
-if len(account_ids) < 10:
+if len(account_ids) < 100:
     for i in range(len(account_ids), 10):
         nickname = f"User{i + 1}"
         email = f"user{i + 1}@example.com"
         account_id = create_account(1, 1, nickname, email)
         account_ids.append(account_id)
 
-for _ in range(10000):
+for _ in range(100000):
     account_id = random.choice(account_ids)
     create_random_order(account_id)
 
