@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "board",
-    "django_extensions",
     "product",
     "kakao_oauth",
     "account",
@@ -49,7 +48,6 @@ INSTALLED_APPS = [
     "marketing",
     "survey",
     "orders",
-
 ]
 
 MIDDLEWARE = [
