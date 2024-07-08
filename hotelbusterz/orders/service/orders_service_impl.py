@@ -44,33 +44,29 @@ class OrdersServiceImpl(OrdersService):
             print('Error creating order:', e)
             raise e
 
-    def readOrderDetails(self, orderId, accountId):
+    def readOrderDetails(self, ordersId, accountId):
         try:
-            orders = self.__ordersRepository.findById(orderId)
+            orders = self.__ordersRepository.findById(ordersId)
 
             if orders.account.id != int(accountId):
                 raise ValueError('Invalid accountId for this order')
 
             print("check order object <- readOrderDetails()")
 
-            # OrdersItemRepositoryImpl을 통해 해당 주문의 상세 항목들을 조회합니다.
-            ordersItemList = self.__ordersItemRepository.findAllByOrder(orders)
+            ordersItem = self.__ordersItemRepository.findByOrders(orders)
+            product = self.__productRepository.findByProductId(ordersItem.product_id)
 
-            # 조회된 주문 상세 내역을 필요한 형식으로 반환할 수 있도록 구성합니다.
             order_details = {
-                'order': {
+                'orders': {
                     'id': orders.id,
                     'status': orders.status,
                     'created_date': orders.created_date,
                 },
-                'order_items': [
-                    {
-                        'product_id': item.product_id,
-                        'product_name': self.__productRepository.findByProductId(item.product_id).productName,
-                        'product_price': self.__productRepository.findByProductId(item.product_id).productPrice,
-                    }
-                    for item in ordersItemList
-                ]
+                'orders_items': {
+                    'product_id': ordersItem.product_id,
+                    'product_name': product.productName,
+                    'product_price': product.productPrice,
+                }
             }
 
             return order_details

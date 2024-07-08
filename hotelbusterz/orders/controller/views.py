@@ -26,16 +26,18 @@ class OrdersView(viewsets.ViewSet):
             productId = data.get('productId')
 
             orderId = self.ordersService.createOrder(accountId, productId)
+            print(f"controller -> createOrders() orderId: {orderId}")
             return Response(orderId, status=status.HTTP_200_OK)
 
         except Exception as e:
             print('주문 과정 중 문제 발생:', e)
             return Response({ 'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-    def readOrders(self, request, orderId):
+    def readOrders(self, request, ordersId):
         try:
             data = request.data
-            print(f'data: {data}, orderId: {orderId}')
+            print(f"readOrders data: {data}")
+            print(f'data: {data}, ordersId: {ordersId}')
 
             userToken = data.get('userToken')
             accountId = self.redisService.getValueByKey(userToken)
@@ -44,13 +46,13 @@ class OrdersView(viewsets.ViewSet):
             if not accountId:
                 raise ValueError('Invalid userToken')
 
-            order = self.ordersService.readOrderDetails(orderId, accountId)
+            orders = self.ordersService.readOrderDetails(ordersId, accountId)
 
-            return Response(order, status=status.HTTP_200_OK)
+            return Response(orders, status=status.HTTP_200_OK)
 
         except Exception as e:
             print('주문 상세 내역 조회 중 문제 발생:', e)
-            return Response({ 'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({ 'error': str(e) }, status=status.HTTP_400_BAD_REQUEST)
 
     def ordersList(self, request):
         try:

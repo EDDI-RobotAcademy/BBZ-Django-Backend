@@ -7,7 +7,7 @@ class OrdersService(ABC):
         pass
 
     @abstractmethod
-    def readOrderDetails(self, orderId, accountId):
+    def readOrderDetails(self, ordersId, accountId):
         pass
 
     @abstractmethod

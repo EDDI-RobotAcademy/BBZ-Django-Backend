@@ -10,4 +10,5 @@ router.register(r'orders', OrdersView)
 urlpatterns = [
     path('', include(router.urls)),
     path('create', OrdersView.as_view({'post': 'createOrders'}), name='order-create'),
+    path('read/<int:ordersId>', OrdersView.as_view({'post': 'readOrders'}), name='order-read'),
 ]

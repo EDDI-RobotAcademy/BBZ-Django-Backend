@@ -7,5 +7,5 @@ class OrdersItemRepository(ABC):
         pass
 
     @abstractmethod
-    def findAllByOrder(self, orders):
+    def findByOrders(self, orders):
         pass
