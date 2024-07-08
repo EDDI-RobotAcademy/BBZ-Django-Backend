@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_extensions",
     "corsheaders",
     "rest_framework",
     "board",
-    "django_extensions",
     "product",
     "kakao_oauth",
     "account",
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "marketing",
     "survey",
     "orders",
-
 ]
 
 MIDDLEWARE = [
