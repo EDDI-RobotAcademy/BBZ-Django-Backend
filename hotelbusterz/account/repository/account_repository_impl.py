@@ -1,4 +1,5 @@
 import datetime
+import pandas as pd
 
 from account.entity.account import Account
 from account.entity.account_log import AccountLog
@@ -47,3 +48,12 @@ class AccountRepositoryImpl(AccountRepository):
 
         return log
 
+
+    def createLogDataFrame(self):
+        tupleData = AccountLog.objects.values_list("account_id", "action", "action_time")
+        dataFrameData = pd.DataFrame(tupleData, columns=["account_id", "action", "action_time"])
+        dataFrameData["action_time"] = pd.to_datetime(dataFrameData["action_time"])
+        return dataFrameData
+
+    def accountList(self):
+        return Account.objects.all()
