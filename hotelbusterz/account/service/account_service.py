@@ -24,3 +24,7 @@ class AccountService(ABC):
     @abstractmethod
     def getNickname(self, accountId):
         pass
+
+    @abstractmethod
+    def checkAdmin(self, email, password):
+        pass

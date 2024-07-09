@@ -1,3 +1,5 @@
+import os
+
 from account.repository.account_repository_impl import AccountRepositoryImpl
 from account.repository.profile_repository_impl import ProfileRepositoryImpl
 from account.service.account_service import AccountService
@@ -42,3 +44,12 @@ class AccountServiceImpl(AccountService):
     def getNickname(self, accountId):
         account = self.__accountRepository.findById(accountId)
         return self.__profileRepository.findByAccount(account)
+
+    def checkAdmin(self, email, password):
+        from dotenv import load_dotenv
+
+        load_dotenv()
+
+        ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
+        ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
+        return email == ADMIN_EMAIL and password == ADMIN_PASSWORD
