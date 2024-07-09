@@ -31,3 +31,6 @@ class BoardServiceImpl(BoardService):
     def modifyBoard(self, boardData, boardId):
         return self.__boardRepository.modify(boardData, boardId)
 
+    def removeBoard(self, boardId):
+        return self.__boardRepository.deleteByBoardId(boardId)
+
