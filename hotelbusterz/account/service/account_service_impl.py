@@ -38,3 +38,7 @@ class AccountServiceImpl(AccountService):
     def registerLog(self, accountId, action, actionTime):
         log = self.__accountRepository.createLog(accountId, action, actionTime)
         return log is not None
+
+    def getNickname(self, accountId):
+        account = self.__accountRepository.findById(accountId)
+        return self.__profileRepository.findByAccount(account)
