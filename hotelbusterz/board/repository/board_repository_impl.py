@@ -37,4 +37,12 @@ class BoardRepositoryImpl(BoardRepository):
         board.save()
         return board
 
+    def deleteByBoardId(self, boardId):
+        board = Board.objects.get(boardId=boardId)
+        board.delete()
+
+
+
+
+
 
