@@ -20,3 +20,7 @@ class AccountService(ABC):
     @abstractmethod
     def registerLog(self, userToken, action, actionTime):
         pass
+
+    @abstractmethod
+    def getNickname(self, accountId):
+        pass
