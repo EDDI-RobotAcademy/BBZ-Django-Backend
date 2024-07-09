@@ -62,7 +62,7 @@ class AccountView(viewsets.ViewSet):
             userToken = request.data.get('userToken')
 
             accountId = self.redisService.getValueByKey(userToken)
-            action = request.data.get('action')
+            action = request.data.get('actionType')
             actionTime = request.data.get('actionTime')
 
             log = self.accountService.registerLog(
@@ -74,4 +74,21 @@ class AccountView(viewsets.ViewSet):
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
             print("로그 생성 중 에러 발생:", e)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def getNickname(self, request):
+        try:
+            userToken = request.data.get('userToken')
+            print(f"getNickname() -> userToken: {userToken}")
+            accountId = self.redisService.getValueByKey(userToken)
+            profile = self.accountService.getNickname(accountId)
+
+            if profile is not None:
+                nickname = profile.nickname
+                return Response({ 'nickname': nickname }, status=status.HTTP_200_OK)
+
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        except Exception as e:
+            print("사용자 닉네임 가져오는 중 에러 발생:", e)
             return Response(status=status.HTTP_400_BAD_REQUEST)
