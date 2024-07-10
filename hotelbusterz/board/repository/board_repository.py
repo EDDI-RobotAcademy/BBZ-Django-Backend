@@ -18,3 +18,8 @@ class BoardRepository(ABC):
     def modify(self, boardData, boardId):
         pass
 
+    @abstractmethod
+    def deleteByBoardId(self, boardId):
+        pass
+
+

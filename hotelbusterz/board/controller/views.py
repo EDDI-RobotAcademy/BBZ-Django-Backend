@@ -41,4 +41,7 @@ class BoardView(viewsets.ViewSet):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def removeBoard(self, request, pk=None):
+        self.boardService.removeBoard(pk)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
