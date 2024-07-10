@@ -1,7 +1,9 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 
+from marketing.entity.models import Marketing
 from marketing.service.marketing_service_impl import MarketingServiceImpl
 
 
@@ -11,4 +13,6 @@ class MarketingView(viewsets.ViewSet):
 
     def marketingList(self, request):
         self.marketingService.createMarketingData()
-        return Response(status=status.HTTP_200_OK)
+        total_data = self.marketingService.createtotalAARRR(Marketing.objects.all())
+
+        return JsonResponse(total_data)
