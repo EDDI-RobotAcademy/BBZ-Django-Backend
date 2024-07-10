@@ -30,3 +30,6 @@ class MarketingServiceImpl(MarketingService):
         marketingData = self.__marketingRepository.createAARRR(accountList, dataFrameToDict)
 
         return marketingData is not None
+
+    def createtotalAARRR(self, marketingData):
+        return self.__marketingRepository.calculateTotal(marketingData)

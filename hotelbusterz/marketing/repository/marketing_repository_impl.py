@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 
+from django.db.models import Sum
+
 from account.entity.action_type import ActionType
 from marketing.entity.models import Marketing
 from marketing.repository.marketing_repository import MarketingRepository
@@ -42,16 +44,16 @@ class MarketingRepositoryImpl(MarketingRepository):
     def createAARRR(self, accountList, dict):
         for account in accountList:
             if account.id in dict.keys():
-                aarrrPerId = Marketing.objects.create(
-                    account=account,
+                aarrrPerId = Marketing.objects.get_or_create(
+                    account_id=account.id,
                     acquisition=1,
                     activation=1,
-                    revenue=1 if dict.get(ActionType.ORDER) else 0,
-                    retention=1 if dict.get(ActionType.ORDER, 0) >= 2 else 0,
-                    referral=1 if dict.get(ActionType.BUTTON_REFERRAL) else 0)
+                    revenue=1 if dict[account.id].get('ORDER') else 0,
+                    retention=1 if dict[account.id].get('ORDER', 0) >= 2 else 0,
+                    referral=1 if dict[account.id].get('REFERRAL') else 0)
             else:
-                aarrrPerId = Marketing.objects.create(
-                    account=account,
+                aarrrPerId = Marketing.objects.get_or_create(
+                    account_id=account.id,
                     acquisition=1,
                     activation=0,
                     revenue=0,
@@ -60,3 +62,12 @@ class MarketingRepositoryImpl(MarketingRepository):
 
         return aarrrPerId
 
+    def calculateTotal(self, marketingData):
+        total_acquisition = marketingData.aggregate(Sum('acquisition'))['acquisition__sum']
+        total_activation = marketingData.aggregate(Sum('activation'))['activation__sum']
+        total_revenue = marketingData.aggregate(Sum('revenue'))['revenue__sum']
+        total_retention = marketingData.aggregate(Sum('retention'))['retention__sum']
+        total_referral = marketingData.aggregate(Sum('referral'))['referral__sum']
+
+        return {'acquisition': total_acquisition, 'activation': total_activation, 'revenue': total_revenue,
+                'retention': total_retention, 'referral': total_referral}
