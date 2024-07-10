@@ -13,3 +13,7 @@ class MarketingRepository(ABC):
     @abstractmethod
     def createAARRR(self, accountList, dict):
         pass
+
+    @abstractmethod
+    def calculateTotal(self, marketingData):
+        pass
