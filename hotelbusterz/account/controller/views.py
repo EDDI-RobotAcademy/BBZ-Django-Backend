@@ -62,6 +62,9 @@ class AccountView(viewsets.ViewSet):
             userToken = request.data.get('userToken')
 
             accountId = self.redisService.getValueByKey(userToken)
+
+            if accountId is None:
+                return Response(status=status.HTTP_200_OK)
             action = request.data.get('actionType')
             actionTime = request.data.get('actionTime')
 
