@@ -8,10 +8,11 @@ from survey.entity.models import Survey
 
 productList = Product.objects.all()
 
+
 def create_random_reservation(product_id, lenOfReservation, numOfAdult, numOfChild):
     try:
         with transaction.atomic():
-            len_of_reservation = random.randint(lenOfReservation - 5, lenOfReservation)
+            len_of_reservation = random.randint(lenOfReservation , lenOfReservation+2)
             num_of_adult = random.randint(1, numOfAdult)
             num_of_child = random.randint(0, numOfChild)
             have_breakfast = random.randint(0, num_of_child + num_of_adult)
@@ -30,7 +31,7 @@ def create_random_reservation(product_id, lenOfReservation, numOfAdult, numOfChi
         print(f"Error occured in creating dummy database:{e}")
 
 
-lenOfReservation = 6
+lenOfReservation = 1
 numOfAdult = 2
 for product in productList:
     i = product.productId
@@ -43,7 +44,7 @@ for product in productList:
             numOfChild = 0
 
         create_random_reservation(i, lenOfReservation, numOfAdult, numOfChild)
-    lenOfReservation += 2
+    lenOfReservation += 3
     numOfAdult += 1
 
 print("Dummy Data creation Completed.")
